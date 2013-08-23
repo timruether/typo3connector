@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <typo3languagemapping_adminhtml_typo3languagemapping_index>
+        <reference name="content">
+            <block type="typo3languagemapping/adminhtml_typo3languagemapping" name="typo3languagemapping" />
+        </reference>
+    </typo3languagemapping_adminhtml_typo3languagemapping_index>
+</layout>

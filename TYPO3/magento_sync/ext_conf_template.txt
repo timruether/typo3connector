@@ -1,0 +1,58 @@
+# cat=basic; type=string; label= Magento Password Hash (Find it in /etc/local.xml -> encryption key)
+magentoPasswordHash = 
+
+# cat=basic; type=int+; label= Standard Customer Group
+magentoGroupId = 1
+
+# cat=basic; type=int+; label= Standard Store ID
+magentoStoreId = 0
+
+# cat=basic; type=int+; label= Standard Website ID
+magentoWebsiteId = 1
+
+# cat=basic; type=boolean; label= Activate Customer (Extension for Magento is needed for this feature)
+autoActivate = 1
+
+# cat=basic; type=string; label= Magento Base Url (Don't forget trailing slash!)
+magentoBaseUrl = 
+
+# cat=basic; type=string; label= Magento SOAP V2 API Url
+magentoApiUrl = 
+# cat=basic; type=string; label= Magento Relative Filesystem Path to TYPO3 (Don't forget trailing slash!)
+magentoRelativePath =
+
+# cat=basic; type=string; label= Magento SOAP V2 API User
+magentoApiUser = TYPO3CONNECTOR
+
+# cat=basic; type=string; label= Magento SOAP V2 API Userkey
+magentoApiPassword = default
+
+# cat=basic; type=string; label= Standard Cookie Domain
+cookieDomain = 
+
+# cat=basic; type=string; label= Standard Cookie Path
+cookiePath = /
+
+# cat=basic; type=int+; label= Standard Cookie Expire
+cookieExpire = 0
+
+# cat=basic; type=string; label= Standard Cookie Name
+magentoCookieName = frontend
+
+# cat=basic; type=boolean; label= is FE-User address default billing address
+magentoDefaultBillingAddress = 1
+
+# cat=basic; type=boolean; label= is FE-User address default shipping address
+magentoDefaultShippingAddress = 1
+
+# cat=basic; type=boolean; label= Activate Hook Automatic Customer creation from TYPO3 backend in Magento
+magentoCreateUserFromTypo3 = 1
+
+# cat=basic; type=boolean; label= Activate Hook Automatic Customer update from  TYPO3 backend in Magento
+magentoUpdateUserFromTypo3 = 1
+
+# cat=basic; type=boolean; label= Activate Hook Automatic Customer creation in registration in Magento
+magentoCreateUserFromFeUserRegister = 1
+
+# cat=basic; type=boolean; label= Activate Hook Automatic Customer update in registration in Magento
+magentoUpdateUserFromFeUserRegister = 1

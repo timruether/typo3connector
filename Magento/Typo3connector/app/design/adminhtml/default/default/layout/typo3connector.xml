@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <typo3connector_adminhtml_typo3connector_index>
+        <reference name="content">
+            <block type="typo3connector/adminhtml_typo3connector" name="typo3connector" />
+        </reference>
+    </typo3connector_adminhtml_typo3connector_index>
+</layout>

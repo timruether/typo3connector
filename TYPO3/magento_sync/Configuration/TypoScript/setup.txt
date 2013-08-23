@@ -1,0 +1,57 @@
+plugin.tx_magentosync {
+	view {
+		templateRootPath = {$plugin.tx_magentosync.view.templateRootPath}
+		partialRootPath = {$plugin.tx_magentosync.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_magentosync.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_magentosync.persistence.storagePid}
+	}
+	features {
+		# uncomment the following line to enable the new Property Mapper.
+		# rewrittenPropertyMapper = 1
+	}
+
+        settings {
+            # not used yet because there is no page context
+            magentoPasswordHash = encryptionhash
+            magentoGroupId = 1
+            magentoStoreId = 0
+            magentoWebsiteId = 1
+            autoActivate = 1
+            magentoRemoteFile = 
+            magentoApiUrl = 
+            magentoApiUser = Dummy
+            magentoApiPassword = dummypassword
+            cookieDomain = 
+            cookiePath = /
+            cookieExpire = 0
+            magentoCookieName = frontend
+            magentoDefaultBillingAddress = 1
+            magentoDefaultShippingAddress = 1
+            magentoCreateUserFromTypo3 = 1
+            magentoUpdateUserFromTypo3 = 1
+            magentoCreateUserFromFeUserRegister = 1
+            magentoUpdateUserFromFeUserRegister = 1
+        }
+}
+
+plugin.tx_magentosync._CSS_DEFAULT_STYLE (
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-magento-sync table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-magento-sync table th {
+		font-weight:bold;
+	}
+
+	.tx-magento-sync table td {
+		vertical-align:top;
+	}
+)

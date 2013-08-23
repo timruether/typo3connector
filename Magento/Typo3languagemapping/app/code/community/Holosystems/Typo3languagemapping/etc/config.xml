@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+* @category   Holosystems
+* @package    Holosystems_Typo3languagemapping
+* @author     holosystems
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <modules>
+        <Holosystems_Typo3languagemapping>
+            <version>0.1.0</version>
+        </Holosystems_Typo3languagemapping>
+    </modules>
+    <admin>
+        <routers>
+            <typo3languagemapping>
+                <use>admin</use>
+                <args>
+                    <module>Holosystems_Typo3languagemapping</module>
+                    <frontName>typo3languagemapping</frontName>
+                </args>
+            </typo3languagemapping>
+        </routers>
+    </admin>
+    <adminhtml>
+        <menu>
+            <typo3connector module="typo3connector">
+                <children>
+                    <typo3languagemapping module="typo3languagemapping">
+                        <title>Manage Languagemappings</title>
+                        <sort_order>0</sort_order>
+                        <action>typo3languagemapping/adminhtml_typo3languagemapping</action>
+                    </typo3languagemapping>
+                </children>
+            </typo3connector>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <typo3languagemapping>
+                            <title>Typo3languagemapping Module</title>
+                            <sort_order>10</sort_order>
+                        </typo3languagemapping>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <typo3languagemapping>Debug Toolbar Options</typo3languagemapping>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <typo3languagemapping>
+                    <file>typo3languagemapping.xml</file>
+                </typo3languagemapping>
+            </updates>
+        </layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <typo3languagemapping>
+                <class>Holosystems_Typo3languagemapping_Model</class>
+                <resourceModel>typo3languagemapping_mysql4</resourceModel>
+            </typo3languagemapping>
+            <typo3languagemapping_mysql4>
+                <class>Holosystems_Typo3languagemapping_Model_Mysql4</class>
+                <entities>
+                    <typo3languagemapping>
+                        <table>typo3languagemapping</table>
+                    </typo3languagemapping>
+                </entities>
+            </typo3languagemapping_mysql4>
+        </models>
+        <resources>
+            <typo3languagemapping_setup>
+                <setup>
+                    <module>Holosystems_Typo3languagemapping</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </typo3languagemapping_setup>
+            <typo3languagemapping_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </typo3languagemapping_write>
+            <typo3languagemapping_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </typo3languagemapping_read>
+        </resources>
+        <blocks>
+            <typo3languagemapping>
+                <class>Holosystems_Typo3languagemapping_Block</class>
+            </typo3languagemapping>
+        </blocks>
+        <helpers>
+            <typo3languagemapping>
+                <class>Holosystems_Typo3languagemapping_Helper</class>
+            </typo3languagemapping>
+        </helpers>
+    </global>
+</config>

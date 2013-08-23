@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+* @category   Holosystems
+* @package    Holosystems_Typo3connector
+* @author     Tim Ruether <tim@holosystems.de>
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+-->
+<config>
+    <modules>
+        <Holosystems_Typo3connector>
+            <version>0.1.0</version>
+        </Holosystems_Typo3connector>
+    </modules>
+    <frontend>
+        <routers>
+            <typo3connector>
+                <use>standard</use>
+                <args>
+                    <module>Holosystems_Typo3connector</module>
+                    <frontName>typo3connector</frontName>
+                </args>
+            </typo3connector>
+        </routers>
+        <layout>
+            <updates>
+                <typo3connector>
+                    <file>typo3connector.xml</file>
+                </typo3connector>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <typo3connector>
+                <use>admin</use>
+                <args>
+                    <module>Holosystems_Typo3connector</module>
+                    <frontName>typo3connector</frontName>
+                </args>
+            </typo3connector>
+        </routers>
+    </admin>
+    <adminhtml>
+        <menu>
+            <typo3connector module="typo3connector">
+                <title>TYPO3 Connector</title>
+                <sort_order>100</sort_order>               
+                <children>
+                    <items module="typo3connector">
+                        <title>Manage Contents</title>
+                        <sort_order>0</sort_order>
+                        <action>typo3connector/adminhtml_typo3connector</action>
+                    </items>
+                </children>
+            </typo3connector>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <typo3connector>
+                            <title>Typo3connector</title>
+                            <sort_order>10</sort_order>
+                        </typo3connector>
+                        <config>
+                            <children>
+                                <holosystems translate="title" module="typo3connector">
+                       
+                                </holosystems>
+                            </children>
+                        </config>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <typo3connector>
+                    <file>typo3connector.xml</file>
+                </typo3connector>
+            </updates>
+        </layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <typo3connector>
+                <class>Holosystems_Typo3connector_Model</class>
+                <resourceModel>typo3connector_mysql4</resourceModel>
+            </typo3connector>
+            <typo3connector_mysql4>
+                <class>Holosystems_Typo3connector_Model_Mysql4</class>
+                <entities>
+                    <typo3connector>
+                        <table>typo3connector</table>
+                    </typo3connector>
+                </entities>
+            </typo3connector_mysql4>
+        </models>
+        <resources>
+            <typo3connector_setup>
+                <setup>
+                    <module>Holosystems_Typo3connector</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </typo3connector_setup>
+            <typo3connector_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </typo3connector_write>
+            <typo3connector_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </typo3connector_read>
+        </resources>
+        <blocks>
+            <typo3connector>
+                <class>Holosystems_Typo3connector_Block</class>
+            </typo3connector>
+        </blocks>
+        <helpers>
+            <typo3connector>
+                <class>Holosystems_Typo3connector_Helper</class>
+            </typo3connector>
+        </helpers>
+        <events>
+            <!--<customer_login>
+                <observers>
+                    <typo3connector_customer_login>
+                        <class>typo3connector/observer</class>
+                        <method>setCustomerCookie</method>             
+                    </typo3connector_customer_login>
+                </observers>
+            </customer_login>
+            <customer_logout>
+                <observers>
+                    <typo3connector_customer_logout>
+                        <class>typo3connector/observer</class>
+                        <method>deleteCustomerCookie</method>             
+                    </typo3connector_customer_logout>
+                </observers>
+            </customer_logout>
+            -->
+        </events>
+    </global>
+</config>

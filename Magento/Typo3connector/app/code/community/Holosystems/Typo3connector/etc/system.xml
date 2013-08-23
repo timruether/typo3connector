@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Holosystems
+ * @package    Holosystems_Typo3connector
+ * @author     Tim Ruether <tim@holosystems.de>
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <tabs>
+        <holosystems translate="label" module="typo3connector">
+            <label>TYPO3 Connector</label>
+            <sort_order>100</sort_order>
+        </holosystems>
+    </tabs>
+    <sections>
+        <system translate="label" module="system">
+            <groups>
+                <holosystems translate="label">
+                    <label>TYPO3 Connector Config</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <typo3connector_baseurl translate="label">
+                            <label>TYPO3 Base URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </typo3connector_baseurl>
+                        <typo3connector_connectorurl translate="label">
+                            <label>TYPO3 Content Connector URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </typo3connector_connectorurl>
+                        <typo3connector_ordermanagement translate="label">
+                            <label>TYPO3 Ordermanagement URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </typo3connector_ordermanagement>
+                        <typo3connector_usermanagement translate="label">
+                            <label>TYPO3 Usermanagement URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </typo3connector_usermanagement>
+                        <typo3connector_httpuser translate="label">
+                            <label>TYPO3 HTTP Auth User</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </typo3connector_httpuser>
+                        <typo3connector_httppassword translate="label">
+                            <label>TYPO3 HTTP Auth Password</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </typo3connector_httppassword>
+                    </fields>
+                </holosystems>
+            </groups>
+        </system>
+    </sections>
+</config>

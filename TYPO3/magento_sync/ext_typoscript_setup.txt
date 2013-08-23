@@ -1,0 +1,21 @@
+config.tx_extbase{
+    persistence{
+        classes{
+
+            Tx_MagentoSync_Domain_Model_User {
+                mapping {
+                    tableName = fe_users
+                    recordType = Tx_MagentoSync_Domain_Model_User
+                }
+            }
+            
+            Tx_MagentoSync_Domain_Model_Content {
+                mapping {
+                    tableName = tt_content
+                    recordType = Tx_MagentoSync_Domain_Model_Content
+                }
+            }
+            
+    	}
+    }
+}
