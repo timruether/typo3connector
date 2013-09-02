@@ -1,0 +1,7 @@
+Magento/Typo3connector/app/code/community/Holosystems/Typo3connector/* app/code/community/Holosystems/Typo3connector
+Magento/Typo3connector/app/design/adminhtml/default/default/layout/* app/design/adminhtml/default/default/layout
+Magento/Typo3connector/app/etc/modules/* app/etc/modules
+
+Magento/Typo3languagemapping/app/design/adminhtml/default/default/layout/* app/design/adminhtml/default/default/layout
+Magento/Typo3languagemapping/app/code/community/Holosystems/Typo3languagemapping/* app/code/community/Holosystems/Typo3languagemapping
+Magento/Typo3languagemapping/app/etc/modules/Holosystems_Typo3languagemapping.xml app/etc/modules/Holosystems_Typo3languagemapping.xml
