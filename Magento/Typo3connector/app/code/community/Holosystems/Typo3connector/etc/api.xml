@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Holosystems_Typo3connector extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category	Holosystems
+ * @package		Holosystems_Typo3connector
+ * @copyright	Copyright © 2013 holosystems ( http://www.holosystems.de/ )
+ * @license		http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * webservice configuration
+ *
+ * @category	Holosystems
+ * @package		Holosystems_Typo3connector
+ * @subpackage	Config
+ * @author		Sebastian Wagner <sebastian.wagner@tritum.de>
+ * @since		0.1.0
+ */
+-->
+<!-- Holosystems/Typo3connector/etc/api.xml -->
+<config>
+	<api>
+		<resources>
+			<typo3connector translate="title" module="typo3connector">
+				<model>typo3connector/typo3connector_api</model>
+				<title>Typo3connector API</title>
+				<acl>typo3connector</acl>
+				<methods>
+					<cleancache translate="title" module="typo3connector">
+						<title>Typo3connector CleanCache</title>
+						<method>cleancache</method>
+						<acl>typo3connector/cleancache</acl>
+					</cleancache>
+				</methods>
+				<faults module="typo3connector">
+				</faults>
+			</typo3connector>
+		</resources>
+		<v2>
+			<resources_function_prefix>
+				<typo3connector>typo3connector</typo3connector>
+			</resources_function_prefix>
+		</v2>
+		<resources_alias>
+			<typo3connector>typo3connector</typo3connector>
+		</resources_alias>
+		<acl>
+			<resources>
+				<typo3connector translate="title" module="typo3connector">
+					<title>TYPO3 Connector</title>
+					<sort_order>3</sort_order>
+					<cleancache translate="title" module="typo3connector">
+						<title>Clean Cache</title>
+					</cleancache>
+				</typo3connector>
+			</resources>
+		</acl>
+	</api>
+</config>

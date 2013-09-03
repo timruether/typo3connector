@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Holosystems_Typo3connector extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * @category	Holosystems
+ * @package		Holosystems_Typo3connector
+ * @copyright	Copyright © 2013 holosystems ( http://www.holosystems.de/ )
+ * @license		http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+/**
+ * webservice definition
+ *
+ * @category	Holosystems
+ * @package		Holosystems_Typo3connector
+ * @subpackage	Config
+ * @author		Sebastian Wagner <sebastian.wagner@tritum.de>
+ * @since		0.1.0
+ */
+-->
+<!-- Holosystems/Typo3connector/etc/wsdl.xml -->
+<definitions xmlns:typens="urn:{{var wsdl.name}}" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/"
+    name="{{var wsdl.name}}" targetNamespace="urn:{{var wsdl.name}}">
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+            <import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/" />
+        </schema>
+    </types>
+    <message name="typo3connectorCleancacheRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="identifier" type="xsd:int" />
+    </message>
+    <message name="typo3connectorCleancacheResponse">
+        <part name="result" type="xsd:string" />
+    </message>
+    <portType name="{{var wsdl.handler}}PortType">
+        <operation name="typo3connectorCleancache">
+            <documentation>Retrieve customers</documentation>
+            <input message="typens:typo3connectorCleancacheRequest" />
+            <output message="typens:typo3connectorCleancacheResponse" />
+        </operation>
+    </portType>
+    <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+        <operation name="typo3connectorCleancache">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+    </binding>
+</definitions>
