@@ -40,6 +40,7 @@ class Holosystems_Typo3connector_Block_Typo3connector extends Mage_Core_Block_Te
 	protected function _getCacheTags()
 	{
 		return array(
+			self::CACHE_TAG,
 			//invalidate cache when Identifier changes
 			self::CACHE_TAG . "_" . $this->getIdentifier(),
 		);

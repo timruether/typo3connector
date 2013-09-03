@@ -150,5 +150,14 @@
             </customer_logout>
             -->
         </events>
+		<cache>
+			<types>
+				<collections translate="label,description" module="typo3connector">
+					<label>TYPO3 Connector</label>
+					<description>Cached TYPO3 blocks</description>
+					<tags>holo_t3conblock</tags>
+				</collections>
+			</types>
+		</cache>
     </global>
 </config>
