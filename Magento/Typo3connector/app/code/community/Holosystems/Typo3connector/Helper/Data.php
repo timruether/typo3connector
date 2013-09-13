@@ -27,6 +27,27 @@ class Holosystems_Typo3connector_Helper_Data extends Mage_Core_Helper_Abstract {
 
     /**
      *
+     * @return string
+     */
+    private function _getLanguageParams() {
+		if (Mage::getConfig()->getModuleConfig('Holosystems_Typo3languagemapping')->is('active', 'true')) {
+			$storeId = Mage::app()->getStore()->getStoreId();
+			if ($storeId) {
+				$collection = Mage::getModel('typo3languagemapping/typo3languagemapping')
+					->getCollection()
+					->addFieldToFilter('store_view_id', $storeId);
+				if ($collection) {
+					$mapping = $collection->getFirstItem();
+					$typo3LanguageUid = $mapping->getLanguageId();
+					return '&L=' . intval($typo3LanguageUid);
+				}
+			}
+		}
+        return '';
+    }
+
+    /**
+     *
      * @param integer $id
      * @return string $content
      */
@@ -35,7 +56,7 @@ class Holosystems_Typo3connector_Helper_Data extends Mage_Core_Helper_Abstract {
         $content = '';
         $baseUrl = Mage::getStoreConfig('system/holosystems/typo3connector_baseurl');
         if ($baseUrl) {
-            $feed_url = $baseUrl . "index.php?id=" . intval($id);
+            $feed_url = $baseUrl . "index.php?id=" . intval($id) . $this->_getLanguageParams();
             $content = $this->_getCurlContent($feed_url);
         }
         return $content;
