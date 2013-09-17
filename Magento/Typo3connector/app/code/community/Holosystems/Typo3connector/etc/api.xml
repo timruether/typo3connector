@@ -40,6 +40,11 @@
 						<method>cleancache</method>
 						<acl>typo3connector/cleancache</acl>
 					</cleancache>
+					<cleanpagecache translate="title" module="typo3connector">
+						<title>Typo3connector CleanPageCache</title>
+						<method>cleanpagecache</method>
+						<acl>typo3connector/cleanpagecache</acl>
+					</cleanpagecache>
 				</methods>
 				<faults module="typo3connector">
 				</faults>
@@ -61,6 +66,9 @@
 					<cleancache translate="title" module="typo3connector">
 						<title>Clean Cache</title>
 					</cleancache>
+					<cleanpagecache translate="title" module="typo3connector">
+						<title>Clean Page Cache</title>
+					</cleanpagecache>
 				</typo3connector>
 			</resources>
 		</acl>

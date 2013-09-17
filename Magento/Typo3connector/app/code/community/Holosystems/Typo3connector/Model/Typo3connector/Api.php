@@ -29,15 +29,24 @@ class Holosystems_Typo3connector_Model_Typo3connector_Api
 {
 
 	/**
+	 * @return string
+	 */
+	public function cleancache() {
+		Mage::log('cleancache: Clearing Cache', NULL, 'success.log', TRUE);
+		Mage::app()->cleanCache(Holosystems_Typo3connector_Block_Typo3connector::CACHE_TAG);
+		return 'cleancache';
+	}
+
+	/**
 	 * @param int $identifier
 	 * @return string
 	 */
-	public function cleancache($identifier = 0) {
+	public function cleanpagecache($identifier = 0) {
 		if($identifier > 0) {
-			Mage::log('cleancache: Clearing Cache for Identifier ' . (int)$identifier, NULL, 'success.log', TRUE);
+			Mage::log('cleanpagecache: Clearing Page Cache for Identifier ' . (int)$identifier, NULL, 'success.log', TRUE);
 			Mage::app()->cleanCache(Holosystems_Typo3connector_Block_Typo3connector::CACHE_TAG . '_' . (int)$identifier);
 		} else {
-			Mage::log('cleancache: Missing identifier', Zend_Log::NOTICE, 'success.log', TRUE);
+			Mage::log('cleanpagecache: Missing identifier', Zend_Log::NOTICE, 'success.log', TRUE);
 		}
 		return 'identifier: ' . (int)$identifier;
 	}

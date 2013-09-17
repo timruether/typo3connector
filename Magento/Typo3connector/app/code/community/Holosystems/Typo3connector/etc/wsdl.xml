@@ -37,21 +37,41 @@
     </types>
     <message name="typo3connectorCleancacheRequest">
         <part name="sessionId" type="xsd:string" />
-        <part name="identifier" type="xsd:int" />
     </message>
     <message name="typo3connectorCleancacheResponse">
         <part name="result" type="xsd:string" />
     </message>
+    <message name="typo3connectorCleanpagecacheRequest">
+        <part name="sessionId" type="xsd:string" />
+        <part name="identifier" type="xsd:int" />
+    </message>
+    <message name="typo3connectorCleanpagecacheResponse">
+        <part name="result" type="xsd:string" />
+    </message>
     <portType name="{{var wsdl.handler}}PortType">
         <operation name="typo3connectorCleancache">
-            <documentation>Retrieve customers</documentation>
+            <documentation>Clean whole TYPO3 cache</documentation>
             <input message="typens:typo3connectorCleancacheRequest" />
             <output message="typens:typo3connectorCleancacheResponse" />
+        </operation>
+        <operation name="typo3connectorCleanpagecache">
+            <documentation>Clean TYPO3 cache for given page</documentation>
+            <input message="typens:typo3connectorCleanpagecacheRequest" />
+            <output message="typens:typo3connectorCleanpagecacheResponse" />
         </operation>
     </portType>
     <binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
         <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
         <operation name="typo3connectorCleancache">
+            <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
+            <input>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </input>
+            <output>
+                <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+            </output>
+        </operation>
+        <operation name="typo3connectorCleanpagecache">
             <soap:operation soapAction="urn:{{var wsdl.handler}}Action" />
             <input>
                 <soap:body namespace="urn:{{var wsdl.name}}" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
