@@ -38,17 +38,34 @@ class Holosystems_Typo3connector_Model_Typo3connector_Api
 	}
 
 	/**
+	 * @param int $pid
+	 * @return Holosystems_Typo3connector_Model_Mysql4_Typo3connector_Collection
+	 */
+	protected function getConnectorsByPid($pid = 0) {
+		$collection = Mage::getModel('typo3connector/typo3connector')->getCollection();
+		$collection->addFieldToFilter('typo3_pages_id', $pid);
+		$collection->addFieldToSelect('identifier');
+		return $collection;
+	}
+
+	/**
 	 * @param int $identifier
 	 * @return string
 	 */
 	public function cleanpagecache($identifier = 0) {
-		if($identifier > 0) {
-			Mage::log('cleanpagecache: Clearing Page Cache for Identifier ' . (int)$identifier, NULL, 'success.log', TRUE);
-			Mage::app()->cleanCache(Holosystems_Typo3connector_Block_Typo3connector::CACHE_TAG . '_' . (int)$identifier);
+		//identifier is a missleading name
+		$pid = $identifier;
+		if($pid > 0) {
+			Mage::log('cleanpagecache: Clearing Page Cache for PID ' . $pid, NULL, 'success.log', TRUE);
+			$connectors = $this->getConnectorsByPid($pid);
+			foreach($connectors as $connector) {
+				Mage::log('cleanpagecache: Clearing identifier ' . $connector->getIdentifier() . ' from Page Cache for PID ' . $pid, NULL, 'success.log', TRUE);
+				Mage::app()->cleanCache(Holosystems_Typo3connector_Block_Typo3connector::CACHE_TAG . '_' . $connector->getIdentifier());
+			}
 		} else {
-			Mage::log('cleanpagecache: Missing identifier', Zend_Log::NOTICE, 'success.log', TRUE);
+			Mage::log('cleanpagecache: Missing PID', Zend_Log::NOTICE, 'success.log', TRUE);
 		}
-		return 'identifier: ' . (int)$identifier;
+		return 'pid: ' . $pid;
 	}
 
 }
