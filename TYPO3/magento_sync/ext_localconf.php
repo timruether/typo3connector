@@ -30,4 +30,12 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 //felogin Hooks
 //$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['felogin']['login_confirmed']['magento_sync'] = 'EXT:magento_sync/Classes/Hooks/class.tx_magentosync_hooksHandler.php:tx_magentosync_hooksHandler->login';
 //$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['felogin']['logout_confirmed']['magento_sync'] = 'EXT:magento_sync/Classes/Hooks/class.tx_magentosync_hooksHandler.php:tx_magentosync_hooksHandler->logout';
+
+
+// The Backend-MenuItem in ClearCache-Pulldown
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['additionalBackendItems']['cacheActions'][] = 'EXT:magento_sync/Classes/Hooks/ClearCacheHook.php:ClearCacheHook';
+
+// The AjaxCall to clear the cache
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc'][] = 'EXT:magento_sync/Classes/Hooks/ClearCacheHook.php:ClearCacheHook->clearCachePostProc';
+
 ?>

@@ -17,7 +17,11 @@ autoActivate = 1
 magentoBaseUrl = 
 
 # cat=basic; type=string; label= Magento SOAP V2 API Url
-magentoApiUrl = 
+magentoApiUrl =
+
+# cat=basic; type=string; label= Magento SOAP V2 API File
+magentoApiLocalFile =
+
 # cat=basic; type=string; label= Magento Relative Filesystem Path to TYPO3 (Don't forget trailing slash!)
 magentoRelativePath =
 
