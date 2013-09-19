@@ -10,8 +10,6 @@ class Holosystems_Typo3connector_IndexController extends Mage_Core_Controller_Fr
      */
     public function indexAction() {
 
-        exit;
-
         $this->loadLayout();
         $this->renderLayout();
     }
@@ -50,6 +48,17 @@ class Holosystems_Typo3connector_IndexController extends Mage_Core_Controller_Fr
             echo json_encode(array('customer' => $customer->getData(), 'customergroup' => $group->getData()));
         }
         exit();
+    }
+    /**
+     * tx_news connector
+     */
+    public function newsAction() {
+        //echo "<pre>";
+        $content = Mage::helper('typo3connector')->getNewsContentUrl(base64_decode($this->getRequest()->getParam('url')));
+        $this->loadLayout();
+        //var_dump($this->getLayout());
+        $this->getLayout()->getBlock('typo3connector')->assign('content', $content);
+        $this->renderLayout();
     }
 
 }
