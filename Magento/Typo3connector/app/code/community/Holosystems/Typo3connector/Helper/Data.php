@@ -29,7 +29,10 @@ class Holosystems_Typo3connector_Helper_Data extends Mage_Core_Helper_Abstract {
             }
         }
 
-        return $content;
+		$helper = Mage::helper('cms');
+		$processor = $helper->getPageTemplateProcessor();
+
+		return $processor->filter($content);
     }
 
     /**
