@@ -45,28 +45,60 @@ class Tx_MagentoSync_Hooks_TypolinkLinkHandler {
 	 * @return string the rendered link
 	 */
 	function main($linktxt, $conf, $linkHandlerKeyword, $linkHandlerValue, $linkParams, &$contentObjectRenderer) {
-		$link = '';
-		$localContentObjectRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
 
-		$query = substr($linkHandlerValue, 2);
-		$linkHandlerValue = 'http://www.mage.local/' . $query;
+		$linkHandlerValue = substr($linkHandlerValue, 2);
+
+		switch ($linkHandlerKeyword) {
+			case 'mage':
+				$mage_link = $this->mage($linkHandlerValue);
+				break;
+			case 'product':
+				$mage_link = $this->product($linkHandlerValue);
+				break;
+		}
+
+		$typolink = $this->getTypoLink($linktxt, $linkParams);
+
+		return str_replace('http://www.mage.local/', $mage_link, $typolink);
+	}
+
+	/**
+	 * Process the typolink
+	 *
+	 * @param $direct_url
+	 *
+	 * @return string the rendered link
+	 */
+	function mage($direct_url) {
+		return '{{store direct_url=\'' . $direct_url . '\'}}';
+	}
+
+	/**
+	 * Process the typolink
+	 *
+	 * @param $sku
+	 *
+	 * @return string the rendered link
+	 */
+	function product($sku) {
+		return '{{widget type=\'tritum_skuproductlink/link\' template=\'tritum_skuproductlink/link.phtml\' sku=\'' . $sku . '\'}}';
+	}
+
+
+	function getTypoLink($linktxt, $linkParams) {
+		$localContentObjectRenderer = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
 
 		$linkParamsArr = explode(' ', $linkParams);
 
-		$link = $localContentObjectRenderer->typoLink(
+		return $localContentObjectRenderer->typoLink(
 			$linktxt,
 			array(
-				'parameter' => $linkHandlerValue,
+				'parameter' => 'http://www.mage.local/',
 				'extTarget' => $linkParamsArr[1]
 			)
 		);
-
-		$mage_link = '{{store direct_url=\'' . $query . '\'}}';
-
-		//replace the fake link with mage string
-		$link = str_replace($linkHandlerValue, $mage_link, $link);
-
-		return $link;
 	}
+
+
 
 }

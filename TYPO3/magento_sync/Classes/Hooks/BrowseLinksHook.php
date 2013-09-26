@@ -88,7 +88,7 @@ class Tx_MagentoSync_Hooks_BrowseLinksHook implements \TYPO3\CMS\Core\ElementBro
 
 		$content = '
 			<form action="" name="mage_link_form" id="mage_link_form">
-				<table border="0" cellpadding="2" cellspacing="1" id="typo3-linkURL">
+				<table border="0" cellpadding="2" cellspacing="1" id="mage-linkURL">
 					<tr>
 						<td>Magento URL:</td>
 						<td>
@@ -111,7 +111,6 @@ class Tx_MagentoSync_Hooks_BrowseLinksHook implements \TYPO3\CMS\Core\ElementBro
 	 * @return array
 	 */
 	public function parseCurrentUrl($href, $siteUrl, $info) {
-
 		//depending on link and setup the href string can contain complete absolute link
 		if (substr($href, 0, 7)=='mage://') {
 			$info['act'] = 'mage_link';
