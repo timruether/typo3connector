@@ -42,10 +42,11 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clea
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['additionalBackendItems']['Tx_MagentoSync_Hooks_BrowseLinksHook'][] = 'EXT:magento_sync/Classes/Hooks/BrowseLinksHook.php';
 
 //register hook for mage-links in the backend
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/rtehtmlarea/mod3/class.tx_rtehtmlarea_browse_links.php']['browseLinksHook']['mage'] = 'EXT:magento_sync/Classes/Hooks/ClearCacheHook.php:Tx_MagentoSync_Hooks_BrowseLinksHook';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/class.browse_links.php']['browseLinksHook']['mage'] = 'EXT:magento_sync/Classes/Hooks/ClearCacheHook.php:Tx_MagentoSync_Hooks_BrowseLinksHook';
+#$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/rtehtmlarea/mod3/class.tx_rtehtmlarea_browse_links.php']['browseLinksHook']['mage'] = 'EXT:magento_sync/Classes/Hooks/ClearCacheHook.php:Tx_MagentoSync_Hooks_BrowseLinksHook';
+#$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['typo3/class.browse_links.php']['browseLinksHook']['mage'] = 'EXT:magento_sync/Classes/Hooks/ClearCacheHook.php:Tx_MagentoSync_Hooks_BrowseLinksHook';
 
 //register hook for parsing mage_links in the frontend
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['typolinkLinkHandler']['mage'] = 'EXT:magento_sync/Classes/Hooks/TypolinkLinkHandler.php:Tx_MagentoSync_Hooks_TypolinkLinkHandler';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_content.php']['typolinkLinkHandler']['product'] = 'EXT:magento_sync/Classes/Hooks/TypolinkLinkHandler.php:Tx_MagentoSync_Hooks_TypolinkLinkHandler';
 
 ?>
