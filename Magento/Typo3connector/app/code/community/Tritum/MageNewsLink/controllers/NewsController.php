@@ -34,12 +34,19 @@ class Tritum_MageNewsLink_NewsController extends Mage_Core_Controller_Front_Acti
 	 * tx_news connector
 	 */
 	public function showAction() {
-		$pid = $this->getRequest()->getParam('pid');
-		$id = $this->getRequest()->getParam('id');
+		$pid = intval($this->getRequest()->getParam('pid'));
+		$id = intval($this->getRequest()->getParam('id'));
 
-		//$content = Mage::helper('typo3connector')->getNewsContentUrl(base64_decode($this->getRequest()->getParam('url')));
+		$content = '';
+		if ( empty($pid) || empty($id) ) {
+			$content = 'Can\'t find this news.';
+		} else {
+			$news_url = 'http://new17typo3.americandj.eu/index.php?id=' . $pid . '&tx_news_pi1[news]=' . $id . '&tx_news_pi1[controller]=News&tx_news_pi1[action]=detail';
+			$content = Mage::helper('typo3connector')->getNewsContentUrl($news_url);
+		}
+
 		$this->loadLayout();
-		$this->getLayout()->getBlock('typo3connector')->assign('content', 'Can\'t find a news.');
+		$this->getLayout()->getBlock('typo3connector')->assign('content', $content);
 		$this->renderLayout();
 	}
 
