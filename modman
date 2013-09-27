@@ -3,8 +3,8 @@ Magento/Typo3connector/app/design/adminhtml/default/default/layout/* app/design/
 Magento/Typo3connector/app/etc/modules/* app/etc/modules
 
 Magento/Typo3connector/app/code/community/Tritum/MageNewsLink/* app/code/community/Tritum/MageNewsLink
-Magento/Typo3connector/app/design/base/default/template/* app/design/frontend/base/default/template
-Magento/Typo3connector/app/design/base/default/layout/* app/design/frontend/base/default/layout
+Magento/Typo3connector/app/design/frontend/base/default/template/* app/design/frontend/base/default/template
+Magento/Typo3connector/app/design/frontend/base/default/layout/* app/design/frontend/base/default/layout
 
 Magento/Typo3languagemapping/app/design/adminhtml/default/default/layout/* app/design/adminhtml/default/default/layout
 Magento/Typo3languagemapping/app/code/community/Holosystems/Typo3languagemapping/* app/code/community/Holosystems/Typo3languagemapping
