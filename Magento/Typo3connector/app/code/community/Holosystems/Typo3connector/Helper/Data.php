@@ -180,6 +180,15 @@ class Holosystems_Typo3connector_Helper_Data extends Mage_Core_Helper_Abstract {
         return $this->_getCurlContent($url);
     }
 
+	/**
+	 * @param $id
+	 * @param array $additionalParams
+	 * @return string
+	 */
+	public function getPageContent($id, $additionalParams = array()) {
+		return $this->_getPageContent($id, $additionalParams);
+	}
+
 }
 
 ?>

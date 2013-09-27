@@ -31,15 +31,33 @@ class Tritum_MageNewsLink_NewsController extends Mage_Core_Controller_Front_Acti
 	const ACTION_LOGIN = 'login';
 
 	/**
+	 * @return Holosystems_Typo3connector_Helper_Data
+	 */
+	protected function getTypo3ConnectorHelper() {
+		return Mage::helper('typo3connector');
+	}
+
+	/**
 	 * tx_news connector
 	 */
 	public function showAction() {
-		$pid = $this->getRequest()->getParam('pid');
-		$id = $this->getRequest()->getParam('id');
+		$pid = intval($this->getRequest()->getParam('pid'));
+		$id = intval($this->getRequest()->getParam('id'));
 
-		//$content = Mage::helper('typo3connector')->getNewsContentUrl(base64_decode($this->getRequest()->getParam('url')));
+		if ( empty($pid) || empty($id) ) {
+			Mage::exception('Tritum_MageNewsLink', 'Can\'t find this news.');
+		}
+
+		$params = array(
+			'tx_news_pi1[controller]=News',
+			'tx_news_pi1[action]=detail',
+			'tx_news_pi1[news]=' . $id
+		);
+
+		$content = $this->getTypo3ConnectorHelper()->getPageContent($pid, $params);
+
 		$this->loadLayout();
-		$this->getLayout()->getBlock('typo3connector')->assign('content', 'Can\'t find a news.');
+		$this->getLayout()->getBlock('typo3connector')->assign('content', $content);
 		$this->renderLayout();
 	}
 
