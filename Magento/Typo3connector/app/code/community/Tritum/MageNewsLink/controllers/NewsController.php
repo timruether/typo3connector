@@ -56,8 +56,14 @@ class Tritum_MageNewsLink_NewsController extends Mage_Core_Controller_Front_Acti
 
 		$content = $this->getTypo3ConnectorHelper()->getPageContent($pid, $params);
 
+		// additional values for magento cache hash
+		$t3paramshash = $params;
+		array_push($t3paramshash, $pid);
+
 		$this->loadLayout();
-		$this->getLayout()->getBlock('typo3connector')->assign('content', $content);
+		$block = $this->getLayout()->getBlock('typo3connector');
+		$block->assign('content', $content);
+		$block->assign('t3paramshash', md5(implode('#', $t3paramshash)));
 		$this->renderLayout();
 	}
 

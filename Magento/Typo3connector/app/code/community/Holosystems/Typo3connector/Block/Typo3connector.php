@@ -33,6 +33,8 @@ class Holosystems_Typo3connector_Block_Typo3connector extends Mage_Core_Block_Te
             $this->getNameInLayout(),
             //build cache in per-Identifier-base
             $this->getIdentifier(),
+			// build cache hash for detail views of typo3 extensions
+			$this->getControllerInfo(),
         );
     }
 
@@ -96,4 +98,13 @@ class Holosystems_Typo3connector_Block_Typo3connector extends Mage_Core_Block_Te
         return $this->getData('typo3connector');
     }
 
+	/**
+	 * @return string
+	 */
+	protected function getControllerInfo() {
+		if ( is_array($this->_viewVars) && isset($this->_viewVars['t3paramshash']) ) {
+			return $this->_viewVars['t3paramshash'];
+		}
+		return '';
+	}
 }
