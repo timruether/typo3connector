@@ -116,7 +116,14 @@ class Holosystems_Typo3connector_Block_Typo3connector extends Mage_Core_Block_Te
 				'tx_news_pi1[' . strtolower($this->getT3Controller()) . ']=' . $this->getT3Id()
 			);
 
-			return $this->getTypo3ConnectorHelper()->getPageContent($this->getT3PageId(), $params);
+			$content = $this->getTypo3ConnectorHelper()->getPageContent($this->getT3PageId(), $params);
+
+			$controllerInfo = $this->getControllerInfo();
+			$content = $this->getTypo3ConnectorHelper()->getMetaFromContent('mage-title', $controllerInfo, $content);
+			$content = $this->getTypo3ConnectorHelper()->getMetaFromContent('mage-keywords', $controllerInfo, $content);
+			$content = $this->getTypo3ConnectorHelper()->getMetaFromContent('mage-description', $controllerInfo, $content);
+
+			return $content;
 		}
 
 		return '';
@@ -146,7 +153,7 @@ class Holosystems_Typo3connector_Block_Typo3connector extends Mage_Core_Block_Te
 	/**
 	 * @return string
 	 */
-	protected function getControllerInfo() {
+	public function getControllerInfo() {
 		if ( $this->getT3Controller() ) {
 			return $this->getT3Controller() . '#' .
 				$this->getT3Action() . '#' .
