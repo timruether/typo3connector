@@ -180,6 +180,47 @@ class Holosystems_Typo3connector_Helper_Data extends Mage_Core_Helper_Abstract {
         return $this->_getCurlContent($url);
     }
 
+	/**
+	 * @param $id
+	 * @param array $additionalParams
+	 * @return string
+	 */
+	public function getPageContent($id, $additionalParams = array()) {
+		return $this->_getPageContent($id, $additionalParams);
+	}
+
+	/**
+	 * @param $class
+	 * @param $controllerInfo
+	 * @param $content
+	 * @return mixed
+	 */
+	protected function _getMetaFromContent($class, $controllerInfo, $content) {
+		$pattern = '/<span class="' . $class . '">.+<\/span>/U';
+		preg_match($pattern, $content, $founds);
+
+		if ($founds) {
+			$content = preg_replace($pattern, '', $content);
+
+			$cache = Mage::app()->getCache();
+
+			$pattern = '/<span class="' . $class . '">(.+)<\/span>/';
+			$found = preg_replace($pattern, '${1}', $founds[0]);
+			$cache->save($found, $controllerInfo . '#' . $class, array("typo3connector_cache"), FALSE);
+		}
+
+		return $content;
+	}
+
+	/**
+	 * @param $class
+	 * @param $controllerInfo
+	 * @param $content
+	 * @return string
+	 */
+	public function getMetaFromContent($class, $controllerInfo, $content) {
+		return $this->_getMetaFromContent($class, $controllerInfo, $content);
+	}
 }
 
 ?>

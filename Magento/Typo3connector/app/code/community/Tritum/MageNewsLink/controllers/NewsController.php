@@ -31,16 +31,74 @@ class Tritum_MageNewsLink_NewsController extends Mage_Core_Controller_Front_Acti
 	const ACTION_LOGIN = 'login';
 
 	/**
+	 * @return Holosystems_Typo3connector_Helper_Data
+	 */
+	protected function getTypo3ConnectorHelper() {
+		return Mage::helper('typo3connector');
+	}
+
+	/**
 	 * tx_news connector
 	 */
 	public function showAction() {
-		$pid = $this->getRequest()->getParam('pid');
-		$id = $this->getRequest()->getParam('id');
+		$pid = intval($this->getRequest()->getParam('pid'));
+		$id = intval($this->getRequest()->getParam('id'));
 
-		//$content = Mage::helper('typo3connector')->getNewsContentUrl(base64_decode($this->getRequest()->getParam('url')));
+		if ( empty($pid) || empty($id) ) {
+			Mage::exception('Tritum_MageNewsLink', 'Can\'t find this news.');
+		}
+
 		$this->loadLayout();
-		$this->getLayout()->getBlock('typo3connector')->assign('content', 'Can\'t find a news.');
+		$block = $this->getLayout()->getBlock('typo3connector');
+
+		$block->setT3Controller('News');
+		$block->setT3Action('detail');
+		$block->setT3Id($id);
+		$block->setT3PageId($pid);
+
+		if ($cacheKey = $block->getCacheKey()) {
+			$cacheData = Mage::app()->loadCache($cacheKey);
+			if (!$cacheData) {
+				$this->setMetaFromContent($block);
+			}
+		}
+
+		$this->setMetaFromCache($block->getControllerInfo());
+
 		$this->renderLayout();
+	}
+
+	protected function setMetaFromContent($block) {
+		$params = array(
+			'tx_news_pi1[controller]=News',
+			'tx_news_pi1[action]=detail',
+			'tx_news_pi1[news]=' . $block->getT3Id()
+		);
+
+		$content = $this->getTypo3ConnectorHelper()->getPageContent($block->getT3PageId(), $params);
+
+		$controllerInfo = $block->getControllerInfo();
+		$this->getTypo3ConnectorHelper()->getMetaFromContent('mage-title', $controllerInfo, $content);
+		$this->getTypo3ConnectorHelper()->getMetaFromContent('mage-keywords', $controllerInfo, $content);
+		$this->getTypo3ConnectorHelper()->getMetaFromContent('mage-description', $controllerInfo, $content);
+	}
+
+	protected function setMetaFromCache($controllerInfo) {
+		$head = $this->getLayout()->getBlock('head');
+
+		$cache = Mage::app()->getCache();
+		$title = $cache->load($controllerInfo . '#' . 'mage-title');
+		if ($title) {
+			$head->setTitle($title);
+		}
+		$keywords = $cache->load($controllerInfo . '#' . 'mage-keywords');
+		if ($keywords) {
+			$head->setKeywords($keywords);
+		}
+		$description = $cache->load($controllerInfo . '#' . 'mage-description');
+		if ($description) {
+			$head->setDescription($description);
+		}
 	}
 
 }

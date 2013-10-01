@@ -21,6 +21,28 @@ class Holosystems_Typo3connector_Block_Typo3connector extends Mage_Core_Block_Te
      * string Extension 
      */
     var $content;
+
+	/**
+	 * string T3Action
+	 */
+	const T3ACTION_DEFAULT = "show";
+
+	/**
+	 * @return mixed
+	 */
+	public function getT3action() {
+		if ($this->getData('t3action')) {
+			return $this->getData('t3action');
+		}
+		return self::T3ACTION_DEFAULT;
+	}
+
+	/**
+	 * @return Holosystems_Typo3connector_Helper_Data
+	 */
+	protected function getTypo3ConnectorHelper() {
+		return Mage::helper('typo3connector');
+	}
     
     /**
      * Additional Conditions to match for a CacheHit to happen
@@ -33,6 +55,8 @@ class Holosystems_Typo3connector_Block_Typo3connector extends Mage_Core_Block_Te
             $this->getNameInLayout(),
             //build cache in per-Identifier-base
             $this->getIdentifier(),
+			// build cache hash for detail views of typo3 extensions
+			$this->getControllerInfo(),
         );
     }
 
@@ -81,7 +105,37 @@ class Holosystems_Typo3connector_Block_Typo3connector extends Mage_Core_Block_Te
         return parent::_prepareLayout();
     }
 
+	/**
+	 * @return string
+	 */
+	protected function _getContent() {
+		if ( $this->getT3Controller() ) {
+			$params = array(
+				'tx_news_pi1[controller]=' . $this->getT3Controller(),
+				'tx_news_pi1[action]=' . $this->getT3Action(),
+				'tx_news_pi1[' . strtolower($this->getT3Controller()) . ']=' . $this->getT3Id()
+			);
+
+			$content = $this->getTypo3ConnectorHelper()->getPageContent($this->getT3PageId(), $params);
+
+			$controllerInfo = $this->getControllerInfo();
+			$content = $this->getTypo3ConnectorHelper()->getMetaFromContent('mage-title', $controllerInfo, $content);
+			$content = $this->getTypo3ConnectorHelper()->getMetaFromContent('mage-keywords', $controllerInfo, $content);
+			$content = $this->getTypo3ConnectorHelper()->getMetaFromContent('mage-description', $controllerInfo, $content);
+
+			return $content;
+		}
+
+		return '';
+	}
+
     public function _toHtml() {
+		if ( $this->getT3Controller() ) {
+			$content = $this->_getContent();
+
+			$this->assign('content', $content);
+		}
+
         $html = parent::_toHtml();
         if ($identifier = $this->getIdentifier()) {
             $html .= $this->helper('typo3connector')->getContent($identifier,$this->getExtension());
@@ -96,4 +150,17 @@ class Holosystems_Typo3connector_Block_Typo3connector extends Mage_Core_Block_Te
         return $this->getData('typo3connector');
     }
 
+	/**
+	 * @return string
+	 */
+	public function getControllerInfo() {
+		if ( $this->getT3Controller() ) {
+			return $this->getT3Controller() . '#' .
+				$this->getT3Action() . '#' .
+				$this->getT3Id() . '#' .
+				$this->getT3PageId();
+		}
+
+		return '';
+	}
 }
